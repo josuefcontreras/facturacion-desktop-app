@@ -1,8 +1,11 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +21,33 @@ namespace facturacionApp.UI
             this.SplashTimer.Start();
         }
 
-        private void SplashTimer_Tick(object sender, EventArgs e)
+        private async void SplashTimer_Tick(object sender, EventArgs e)
         {
-            this.SplashTimer.Stop();
-            this.Hide();
-            new UI.DashboardForm().Show();
+            string myConnectionString = ConfigurationManager.ConnectionStrings["MySqlConnectionString"].ConnectionString;
+
+            await ExecuteFileFromRoot(myConnectionString, "practica_final_db.sql"); 
+
+            SplashTimer.Stop();
+            Hide();
+            new DashboardForm().Show();
+        }
+
+        private async Task ExecuteFileFromRoot(string connectionString, string fileName)
+        {
+            string filePath = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName, fileName);
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                string data = File.ReadAllText(filePath);
+
+                conn.Open();
+
+                using (MySqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = data;
+                    await cmd.ExecuteNonQueryAsync();
+                }
+            }
         }
     }
 }

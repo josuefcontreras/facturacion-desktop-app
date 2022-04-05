@@ -15,6 +15,7 @@ namespace facturacionApp.UI
         {
             InitializeComponent();
         }
+
         productoDAL producto_dal = new productoDAL();
         clienteDAL cliente_dal = new clienteDAL();
         facturaDAL factura_dal = new facturaDAL();
@@ -22,6 +23,7 @@ namespace facturacionApp.UI
         {
             Columns = { "ID Producto", "Producto", "Precio x unidad", "Cantidad", "Total" }
         };
+
         private void CloseButton_Click(object sender, EventArgs e)
         {
             this.Close();

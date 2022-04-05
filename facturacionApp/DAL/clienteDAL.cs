@@ -29,11 +29,11 @@ namespace facturacionApp.DAL
             {
                 // SQL Query to get data from database
                 string sql = @"SELECT 
-                               cliente.codigo_cliente as 'Cliente ID',
-                               cliente.nombre as 'Nombre', 
-                               cliente.apellido 'Apellido',
-                               cliente.cedula as 'Cedula',
-                               cliente.telefono as 'Telefono'
+                               CLIENTE.codigo_cliente as 'Cliente ID',
+                               CLIENTE.nombre as 'Nombre', 
+                               CLIENTE.apellido 'Apellido',
+                               CLIENTE.cedula as 'Cedula',
+                               CLIENTE.telefono as 'Telefono'
                                FROM CLIENTE 
                                ORDER BY codigo_cliente ASC";
 
@@ -200,12 +200,12 @@ namespace facturacionApp.DAL
             {
                 // SQL Query to get data from database
                 string sql = @"SELECT
-                                cliente.codigo_cliente as 'Cliente ID',
-                                cliente.nombre as 'Nombre', 
-                                cliente.apellido 'Apellido',
-                                cliente.cedula as 'Cedula',
-                                cliente.telefono as 'Telefono'
-                              FROM CLIENTE WHERE cliente.nombre LIKE @q OR cliente.apellido LIKE @q OR cliente.cedula LIKE @q";
+                                CLIENTE.codigo_cliente as 'Cliente ID',
+                                CLIENTE.nombre as 'Nombre', 
+                                CLIENTE.apellido 'Apellido',
+                                CLIENTE.cedula as 'Cedula',
+                                CLIENTE.telefono as 'Telefono'
+                              FROM CLIENTE WHERE CLIENTE.nombre LIKE @q OR CLIENTE.apellido LIKE @q OR CLIENTE.cedula LIKE @q";
                 // For executing cmmand
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 command.Parameters.AddWithValue("@q", $"%{q}%");
@@ -243,12 +243,12 @@ namespace facturacionApp.DAL
             {
                 // SQL Query to get data from database
                 string sql = @"SELECT
-                                cliente.codigo_cliente as 'Cliente ID',
-                                cliente.nombre as 'Nombre', 
-                                cliente.apellido 'Apellido',
-                                cliente.cedula as 'Cedula',
-                                cliente.telefono as 'Telefono'
-                              FROM CLIENTE WHERE cliente.cedula = @q";
+                                CLIENTE.codigo_cliente as 'Cliente ID',
+                                CLIENTE.nombre as 'Nombre', 
+                                CLIENTE.apellido 'Apellido',
+                                CLIENTE.cedula as 'Cedula',
+                                CLIENTE.telefono as 'Telefono'
+                              FROM CLIENTE WHERE CLIENTE.cedula = @q";
                 // For executing cmmand
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 command.Parameters.AddWithValue("@q", q);
